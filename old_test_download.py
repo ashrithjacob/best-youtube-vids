@@ -85,9 +85,7 @@ async def process_video(video_path, video_id):
         content_type = await identify_content_type(transcription['text'])
         
         logging.info(f"Finding insightful clips for {video_path}")
-        print("Heeer fuirst")
         clips = await find_insightful_clips(transcription['text'], content_type)
-        print("done")
         processed_clips = []
         for i, clip in enumerate(clips):
             logging.info(f"Extracting and enhancing clip {i+1} for {video_path}")
@@ -210,9 +208,7 @@ async def find_insightful_clips(transcript, content_type, min_duration=60, max_d
                     "temperature": 0.8,
                 }
             ) as response:
-                print("Heeer")
                 result = await response.json()
-                print("RES", result)
                 content = result['choices'][0]['message']['content']
                 logging.info(f"API Response: {content}")
                 print("HEEER") 
